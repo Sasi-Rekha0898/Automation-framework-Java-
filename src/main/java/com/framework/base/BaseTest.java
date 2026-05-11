@@ -20,11 +20,13 @@ public class BaseTest {
 		{	
 			ChromeOptions options = new ChromeOptions();
 
-            
-            options.addArguments("--headless=new");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-			driver = new ChromeDriver();
+	        options.addArguments("--headless=new");
+	        options.addArguments("--no-sandbox");
+	        options.addArguments("--disable-dev-shm-usage");
+	        options.addArguments("--remote-allow-origins=*");
+	        options.addArguments("--disable-gpu");
+
+	        driver = new ChromeDriver(options);
 		}
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(config.getimplicit()));
