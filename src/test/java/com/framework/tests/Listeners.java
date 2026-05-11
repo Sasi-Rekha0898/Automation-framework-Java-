@@ -1,12 +1,12 @@
-package com.framework.utils;
-
+package com.framework.tests;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.framework.utils.ExtentManager;
 
+public class Listeners implements ITestListener{
 
-public class Listeners implements ITestListener  {
 	ExtentReports extent = ExtentManager.getReportObject();
 	ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 

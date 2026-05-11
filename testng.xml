@@ -3,7 +3,7 @@
 <suite name="Automation Suite">
 
 	<listeners>
-        <listener class-name="com.framework.utils.Listeners"/>
+        <listener class-name="com.framework.tests.Listeners"/>
     </listeners>
 
     <test name="Login Tests">
