@@ -12,6 +12,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install JSON Server
+        run: npm install -g json-server
+
+      - name: Start mock API using students.json
+        run: json-server src/test/resources/students.json --port 3000 &
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
