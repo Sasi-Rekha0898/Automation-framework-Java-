@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.framework.config.ConfigReader;
 public class BaseTest {
@@ -16,7 +17,13 @@ public class BaseTest {
 	
 	{
 		if (config.getBrowser().equalsIgnoreCase("Chrome"))
-		{
+		{	
+			ChromeOptions options = new ChromeOptions();
+
+            
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
 			driver = new ChromeDriver();
 		}
 		
