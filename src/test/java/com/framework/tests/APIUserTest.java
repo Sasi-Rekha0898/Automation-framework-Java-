@@ -12,7 +12,7 @@ public class APIUserTest extends BaseAPI {
 	
 	Faker faker = new Faker();
     String email = faker.internet().emailAddress();
-    int user_id;
+    String user_id;
 
     @Test
     public void getUser() {
@@ -21,7 +21,7 @@ public class APIUserTest extends BaseAPI {
 
         setup()
         .when()
-            .get("/public/v2/users")
+            .get("/students")
         .then()
             .statusCode(200)
             .log().body();
@@ -34,9 +34,9 @@ public class APIUserTest extends BaseAPI {
 
         String payload = "{\n" +
                 "  \"name\": \"Enakshi Pandey\",\n" +
-                "  \"email\": \"" + email + "\",\n" +
-                "  \"gender\": \"female\",\n" +
-                "  \"status\": \"active\"\n" +
+                "  \"location\": \"Chennai\",\n" +
+                "  \"phone\": \"9876543210\",\n" +
+                "  \"courses\": [\"Java\", \"Selenium\"]\n" +
                 "}";
         
         System.out.println("                ADD  USER DETAILS          ");
@@ -45,10 +45,9 @@ public class APIUserTest extends BaseAPI {
                 setup()
                 .body(payload)
                 .when()
-                .post("/public/v2/users");
+                .post("/students");
 
-        user_id = response.jsonPath().getInt("id");
-
+        user_id = response.jsonPath().getString("id");
         System.out.println("Status Code: " + response.getStatusCode());
         System.out.println("New ID Generated: " + user_id);
         System.out.println("==============================================================================");
@@ -59,17 +58,17 @@ public class APIUserTest extends BaseAPI {
     public void putUser() {
 
         String payload = "{\n" +
-                "  \"name\": \"Pandey\",\n" +
-                "  \"email\": \"" + email + "\",\n" +
-                "  \"gender\": \"male\",\n" +
-                "  \"status\": \"inactive\"\n" +
+                "  \"name\": \"Pandey Updated\",\n" +
+                "  \"location\": \"Bangalore\",\n" +
+                "  \"phone\": \"9999999999\",\n" +
+                "  \"courses\": [\"Playwright\", \"API Testing\"]\n" +
                 "}";
         System.out.println("                  UPDATE  USER  DETAILS           ");
 
         setup()
         .body(payload)
         .when()
-        .put("/public/v2/users/" + user_id)
+        .put("/students/" + user_id)
         .then()
         .statusCode(200)
         .log().body();
@@ -83,9 +82,9 @@ public class APIUserTest extends BaseAPI {
 
         setup()
         .when()
-        .delete("/public/v2/users/" + user_id)
+        .delete("/students/" + user_id)
         .then()
-        .statusCode(204);
+        .statusCode(200);
         System.out.println("User Deleted");
         System.out.println("==============================================================================");
     }
